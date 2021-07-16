@@ -1,13 +1,15 @@
 #!/bin/bash
 
+if [ 'vyattacfg' != $(id -ng) ]; then
+ exec sg vyattacfg -c "$0 $@"
+fi
+
 read -p "Public IP of this router: " endpoint
 echo "Here is th IP you entered $endpoint "
 echo "First one"
 
 
-if [ 'vyattacfg' != $(id -ng) ]; then
- exec sg vyattacfg -c "$0 $@"
-fi
+
 
 run=/opt/vyatta/sbin/vyatta-cfg-cmd-wrapper
 
