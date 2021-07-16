@@ -4,6 +4,13 @@ if [ 'vyattacfg' != $(id -ng) ]; then
  exec sg vyattacfg -c "$0 $@"
 fi
 
+read -p "Did you Download the file? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    exit 1
+fi
+
 read -p "Public IP of this router: " endpoint
 echo "Here is th IP you entered $endpoint "
 echo "First one"
@@ -11,7 +18,7 @@ echo "First one"
 
 
 
-run=/opt/vyatta/sbin/vyatta-cfg-cmd-wrapper
+
 
 
 echo "End of File"
