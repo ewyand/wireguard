@@ -1,6 +1,7 @@
 #!/bin/bash
 
 read -p "Public IP of this router: " endpoint
+echo "Here is th IP you entered $endpoint "
 
 if [ 'vyattacfg' != $(id -ng) ]; then
  exec sg vyattacfg -c "$0 $@"
@@ -9,14 +10,14 @@ fi
 run=/opt/vyatta/sbin/vyatta-cfg-cmd-wrapper
 
 
-wg genkey | tee /config/auth/wg.key | wg pubkey >  /config/auth/wg.public
+# wg genkey | tee /config/auth/wg.key | wg pubkey >  /config/auth/wg.public
 
 
 $run begin
-$run set interfaces wireguard wg0 address 10.255.255.1/24
-$run set interfaces wireguard wg0 listen-port 51820
-$run set interfaces wireguard wg0 route-allowed-ips true
-$run set interfaces wireguard wg0 private-key /config/auth/wg.key
+#$run set interfaces wireguard wg0 address 10.255.255.1/24
+#$run set interfaces wireguard wg0 listen-port 51820
+#$run set interfaces wireguard wg0 route-allowed-ips true
+#$run set interfaces wireguard wg0 private-key /config/auth/wg.key
 $run set firewall name WAN_LOCAL rule 120 action accept
 $run set firewall name WAN_LOCAL rule 120 protocol udp
 $run set firewall name WAN_LOCAL rule 120 description 'WireGuard'
