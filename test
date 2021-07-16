@@ -1,0 +1,5 @@
+#!/bin/bash
+
+read -p "Public IP of this router: " endpoint
+echo "Here is th IP you entered $endpoint "
+echo "End of File"
