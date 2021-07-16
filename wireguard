@@ -5,6 +5,9 @@ if [ 'vyattacfg' != $(id -ng) ]; then
 fi
 run=/opt/vyatta/sbin/vyatta-cfg-cmd-wrapper
 
+curl -OL https://github.com/WireGuard/wireguard-vyatta-ubnt/releases/download/1.0.20210606-1/e300-v2-v1.0.20210606-v1.0.20210424.deb
+
+sudo dpkg -i *.deb
 
 
 wg genkey | tee /config/auth/wg.key | wg pubkey >  /config/auth/wg.public
