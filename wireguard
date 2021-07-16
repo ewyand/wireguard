@@ -1,23 +1,42 @@
 #!/bin/vbash
 
-# wg genkey | tee /config/auth/wg.key | wg pubkey >  /config/auth/wg.public
+read -p "Public IP of this router: " endpoint
 
-configure
+if [ 'vyattacfg' != $(id -ng) ]; then
+ exec sg vyattacfg -c "$0 $@"
+fi
 
-set interfaces wireguard wg0 address 10.255.255.1/24
-set interfaces wireguard wg0 listen-port 51820
-set interfaces wireguard wg0 route-allowed-ips true
-set interfaces wireguard wg0 private-key /config/auth/wg.key
-
-set firewall name WAN_LOCAL rule 120 action accept
-set firewall name WAN_LOCAL rule 120 protocol udp
-set firewall name WAN_LOCAL rule 120 description 'WireGuard'
-set firewall name WAN_LOCAL rule 120 destination port 51820
-
-set system package repository stretch components 'main contrib non-free' 
-set system package repository stretch distribution stretch
-set system package repository stretch url http://http.us.debian.org/debian
+run=/opt/vyatta/sbin/vyatta-cfg-cmd-wrapper
 
 
-commit
-exit
+wg genkey | tee /config/auth/wg.key | wg pubkey >  /config/auth/wg.public
+
+
+$run begin
+$run set interfaces wireguard wg0 address 10.255.255.1/24
+$run set interfaces wireguard wg0 listen-port 51820
+$run set interfaces wireguard wg0 route-allowed-ips true
+$run set interfaces wireguard wg0 private-key /config/auth/wg.key
+$run set firewall name WAN_LOCAL rule 120 action accept
+$run set firewall name WAN_LOCAL rule 120 protocol udp
+$run set firewall name WAN_LOCAL rule 120 description 'WireGuard'
+$run set firewall name WAN_LOCAL rule 120 destination port 51820
+$run set system package repository stretch components 'main contrib non-free' 
+$run set system package repository stretch distribution stretch
+$run set system package repository stretch url http://http.us.debian.org/debian
+$run commit
+$run end
+
+
+sudo apt-get update && sudo apt-get install qrencode -y
+
+$run begin
+$run delete system package
+$run commit
+$run end
+
+
+touch /config/scripts/nextip.txt
+cat >> /config/scripts/nextip.txt << EOF
+2
+EOF
