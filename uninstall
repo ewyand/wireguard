@@ -6,7 +6,8 @@ fi
 
 run=/opt/vyatta/sbin/vyatta-cfg-cmd-wrapper
 
-sudo rm /config/auth/wg.key && sudo rm /config/auth/wg.public
+sudo rm /config/auth/wg.key
+sudo rm /config/auth/wg.public
 
 $run begin
 
@@ -17,7 +18,12 @@ $run commit
 $run save
 $run end
 
-sudo dpkg --remove wireguard && sudo apt remove qrencode -y && sudo apt autoremove -y
-sudo rm *.deb  && sudo rm /config/scripts/*.conf && sudo rm /config/scripts/*.peer
-sudo rm /config/scripts/addvpn && sudo rm /config/scripts/nextip.txt
+sudo dpkg --remove wireguard
+sudo apt remove qrencode -y
+sudo apt autoremove -y
+sudo rm *.deb
+sudo rm /config/scripts/*.conf
+sudo rm /config/scripts/*.peer
+sudo rm /config/scripts/addvpn
+sudo rm /config/scripts/nextip.txt
 cd ~ && rm -rf wireguard
