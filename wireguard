@@ -52,3 +52,5 @@ touch /config/scripts/nextip.txt
 cat >> /config/scripts/nextip.txt << EOF
 2
 EOF
+
+sed "s/routerpubkey=CHANGEME/routerpubkey=$routerpubkey/g" -i ~/wireguard/addvpn
