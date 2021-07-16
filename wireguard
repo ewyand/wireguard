@@ -16,9 +16,9 @@ wg genkey | tee /config/auth/wg.key | wg pubkey >  /config/auth/wg.public
 routerpubkey=`cat /config/auth/wg.public`
 
 read -p "Public IP of this router: " endpoint
-read -p "List local IP you want assed over VPN (seperate with comma's): " allowedips
-echo "Here is th IP you entered $endpoint "
-echo " This is the local public key: $routerpubkey "
+read -p "List local IP you want access over VPN (seperate with comma's): " allowedips
+#echo "Here is th IP you entered $endpoint "
+#echo " This is the local public key: $routerpubkey "
 
 
 
