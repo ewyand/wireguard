@@ -1,4 +1,4 @@
-#!/bin/vbash
+#!/bin/bash
 
 read -p "Public IP of this router: " endpoint
 
