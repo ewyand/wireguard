@@ -56,4 +56,4 @@ EOF
 sed "s/routerpubkey=CHANGEME/routerpubkey=$routerpubkey/g" -i ~/wireguard/addvpn
 #sed "s/routerip=CHANGEME/routerip=$routerip/g" -i ~/wireguard/addvpn
 sed "s/endpoint=CHANGEME/endpoint=$endpoint/g" -i ~/wireguard/addvpn
-sed "s/allowedips=CHANGEME/allowedips=$allowdips/g" -i ~/wireguard/addvpn
+sed "s/allowedips=CHANGEME/allowedips=$allowedips/g" -i ~/wireguard/addvpn
