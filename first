@@ -11,6 +11,7 @@ $run set system package repository stretch components 'main contrib non-free'
 $run set system package repository stretch distribution stretch
 $run set system package repository stretch url http://http.us.debian.org/debian
 $run commit
+$run save
 $run end
 
 sudo apt update
