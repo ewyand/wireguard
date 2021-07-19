@@ -11,12 +11,27 @@ then
     exit 1
 fi
 
-read -p "Public IP of this router: " endpoint
-echo "Here is th IP you entered $endpoint "
+#read -p "Public IP of this router: " endpoint
+#echo "Here is th IP you entered $endpoint "
 echo "First one"
 
 
+url='https://github.com/WireGuard/wireguard-vyatta-ubnt/releases/latest'
+html=$( curl -# -L "${url}" 2> '/dev/null' )
 
+module=$(
+  <<< "${html}" \
+  grep -P -o -e '(?<=<li>Module <strong>)(.*?)(?=<\/strong><\/li>)' |
+  head -n 1
+)
+
+tools=$(
+  <<< "${html}" \
+  grep -P -o -e '(?<=<li>Tools <strong>)(.*?)(?=<\/strong><\/li>)' |
+  head -n 1
+)
+
+printf '%s\n' "Module: ${module}" "Tools: ${tools}"
 
 
 
