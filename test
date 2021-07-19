@@ -16,7 +16,7 @@ fi
 echo "First one"
 
 
-url='https://github.com/WireGuard/wireguard-vyatta-ubnt/releases/latest'
+url='https://github.com/WireGuard/wireguard-vyatta-ubnt/releases'
 html=$( curl -# -L "${url}" 2> '/dev/null' )
 
 module=$(
