@@ -1,5 +1,5 @@
 #!/bin/bash
-test
+test 2
 if [ 'vyattacfg' != $(id -ng) ]; then
  exec sg vyattacfg -c "$0 $@"
 fi
